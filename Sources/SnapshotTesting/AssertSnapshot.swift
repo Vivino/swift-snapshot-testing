@@ -173,7 +173,7 @@ public func verifySnapshot<Value, Format>(
   )
   -> String? {
 
-      // This has been commented out because it breaks working with Nimble
+      // This has been commented out because it breaks working with Quick
 //    CleanCounterBetweenTestCases.registerIfNeeded()
     let recording = recording || isRecording
 
