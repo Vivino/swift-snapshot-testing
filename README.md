@@ -10,6 +10,11 @@ Delightful Swift snapshot testing.
 ![An example of a snapshot failure in Xcode.](.github/snapshot-test-1.png)
 -->
 
+## Updates in this Fork
+- Added back Podfile
+- Adds toggle for turning off automatic naming when XCTestCases finish `CleanCounterBetweenTestCases.cleanBetweenEachTestCase`
+- Adds func that users can call directly to reset automatic test case naming `CleanCounterBetweenTestCases.resetAutomaticNaming`
+
 ## Usage
 
 Once [installed](#installation), _no additional configuration is required_. You can import the `SnapshotTesting` module and call the `assertSnapshot` function.

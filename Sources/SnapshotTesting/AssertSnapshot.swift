@@ -172,9 +172,7 @@ public func verifySnapshot<Value, Format>(
   line: UInt = #line
   )
   -> String? {
-
-      // This has been commented out because it breaks working with Quick
-//    CleanCounterBetweenTestCases.registerIfNeeded()
+    CleanCounterBetweenTestCases.registerIfNeeded()
     let recording = recording || isRecording
 
     do {
@@ -343,22 +341,29 @@ func sanitizePathComponent(_ string: String) -> String {
 }
 
 // We need to clean counter between tests executions in order to support test-iterations.
-private class CleanCounterBetweenTestCases: NSObject, XCTestObservation {
+public class CleanCounterBetweenTestCases: NSObject, XCTestObservation {
     private static var registered = false
     private static var registerQueue = DispatchQueue(label: "co.pointfree.SnapshotTesting.testObserver")
+    public static var cleanBetweenEachTestCase = true
 
     static func registerIfNeeded() {
-      registerQueue.sync {
-        if !registered {
-          registered = true
-          XCTestObservationCenter.shared.addTestObserver(CleanCounterBetweenTestCases())
+        if cleanBetweenEachTestCase {
+            registerQueue.sync {
+                if !registered {
+                    registered = true
+                    XCTestObservationCenter.shared.addTestObserver(CleanCounterBetweenTestCases())
+                }
+            }
         }
-      }
     }
 
-    func testCaseDidFinish(_ testCase: XCTestCase) {
-      counterQueue.sync {
-        counterMap = [:]
-      }
+    public func testCaseDidFinish(_ testCase: XCTestCase) {
+        Self.resetAutomaticNaming()
+    }
+
+    public static func resetAutomaticNaming() {
+        counterQueue.sync {
+          counterMap = [:]
+        }
     }
 }
