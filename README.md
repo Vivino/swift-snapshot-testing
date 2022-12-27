@@ -12,8 +12,8 @@ Delightful Swift snapshot testing.
 
 ## Updates in this Fork
 - Added back Podfile
-- Added the ability to stop the automatic naming reset on each test case execution (did not work with Quick)
-- Exposed `CleanCounterBetweenTestCases.resetAutomaticNaming`
+- Adds toggle for turning off automatic naming when XCTestCases finish `CleanCounterBetweenTestCases.cleanBetweenEachTestCase`
+- Adds func that users can call directly to reset automatic test case naming `CleanCounterBetweenTestCases.resetAutomaticNaming`
 
 ## Usage
 
